@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --env-file=.env server.js"
+    "dev": "nodemon --env-file=.env server.js",
+    "start": "node server.js",
+    "build": "echo 'This is the build script'"
   },
   "keywords": [],
   "type": "module",
