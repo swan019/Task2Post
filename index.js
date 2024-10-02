@@ -160,7 +160,7 @@ app.use('/api/visiters', visitorRoutes);
 
 app.get('/', async (req, res) => {
     try {
-        const response = await fetch('http://localhost:3000/api/visiters'); 
+        const response = await fetch(`http://localhost:${process.env.PORT}/api/visiters`); 
         console.log(response);
         const data = await response.json();
         console.log(data); 
