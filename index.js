@@ -160,7 +160,7 @@ app.use('/api/visiters', visitorRoutes);
 
 app.get('/', async (req, res) => {
     try {
-        const response = await fetch(`http://127.0.0.1:${process.env.PORT}/api/visiters`);  
+        const response = await fetch(`https://task2-post.vercel.app/api/visiters`);  
         const data = await response.json();
         res.render("HomePage",  { totalVisitors: data.totalVisitors, totalActiveUsers: data.totalActivUsers });
     } catch (error) {
