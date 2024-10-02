@@ -108,7 +108,7 @@ bot.command('generate', async (ctx) => {
         //make textGeneration api
         const result = await generateContent(AllEvents);
         const response = await result.response;
-        console.log('responce :', response);
+        // console.log('responce :', response);
         const text = await response.text();
 
         //send response
@@ -116,7 +116,7 @@ bot.command('generate', async (ctx) => {
         await ctx.deleteMessage(stickerWaitingId);
         await ctx.reply(text)
     } catch (error) {
-        console.log('Facing Issues');
+        console.log('Facing Issues', error);
     }
 });
 
@@ -160,10 +160,8 @@ app.use('/api/visiters', visitorRoutes);
 
 app.get('/', async (req, res) => {
     try {
-        const response = await fetch(`http://localhost:${process.env.PORT}/api/visiters`); 
-        console.log(response);
+        const response = await fetch(`http://localhost:${process.env.PORT}/api/visiters`);  
         const data = await response.json();
-        console.log(data); 
         res.render("HomePage",  { totalVisitors: data.totalVisitors, totalActiveUsers: data.totalActivUsers });
     } catch (error) {
         console.error('Error fetching visitor count:', error);

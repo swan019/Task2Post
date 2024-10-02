@@ -60,9 +60,9 @@ async function generateContent(userDailyTasks) {
     And create one post for each plateform
   `;
   const result = await model.generateContent(prompt);
-  console.log('result :', result);
+  // console.log('result :', result);
   const response = await result.response;
-  console.log('responce :', response);
+  // console.log('responce :', response);
   const text = await response.text(); // Ensure to await the text() method
   
   return result;
