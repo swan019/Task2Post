@@ -162,7 +162,7 @@ app.get('/', async (req, res) => {
     try {
         const response = await fetch(`https://task2-post.vercel.app/api/visiters`);  
         const data = await response.json();
-        res.render("HomePage",  { totalVisitors: data.totalVisitors, totalActiveUsers: data.totalActivUsers });
+        res.render("HomePage",  { totalVisitors: data.totalVisitors || 0, totalActiveUsers: data.totalActivUsers || 0 });
     } catch (error) {
         console.error('Error fetching visitor count:', error);
         res.render("HomePage", { totalVisitors: 0 }); 
