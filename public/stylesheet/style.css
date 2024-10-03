@@ -165,6 +165,8 @@ section {
 }
 
 .Uses {
+  margin: 15px 10px;
+  padding-top: 60px;
   color: white;
   line-height: 30px;
   font-size: 20px;
@@ -262,6 +264,7 @@ img{
   }
 
   .Uses {
+    margin: 15px 10px;
     flex-direction: column;
     padding: 20px;
     font-size: 18px;
