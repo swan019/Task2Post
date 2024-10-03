@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const ip = getClientIp(req); 
-    // console.log(`Visitor's IP: ${ip}`);
+    
+    
+    console.log(`Visitor's IP: ${ip}`);
     
     try {
         

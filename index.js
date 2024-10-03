@@ -13,6 +13,9 @@ import User from './models/User.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { getClientIp } from '@supercharge/request-ip';
+import Visitor from './models/Visitors.js'; 
+
 
 // Create __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
@@ -148,6 +151,7 @@ bot.on(message('text'), async (ctx) => {
 });
 
 bot.launch();
+  
 
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
@@ -160,9 +164,19 @@ app.use('/api/visiters', visitorRoutes);
 
 app.get('/', async (req, res) => {
     try {
-        const response = await fetch(`https://task2-post.vercel.app/api/visiters`);  
-        const data = await response.json();
-        res.render("HomePage",  { totalVisitors: data.totalVisitors || 0, totalActiveUsers: data.totalActivUsers || 0 });
+        const ip = getClientIp(req);
+        const existingVisitor = await Visitor.findOne({ ip });
+  
+        if (!existingVisitor) {
+            
+            const newVisitor = new Visitor({ ip });
+            await newVisitor.save();
+        }
+  
+       
+        const totalVisitors = await Visitor.countDocuments();
+        const totalActivUsers = await User.countDocuments();
+        res.render("HomePage",  { totalVisitors: totalVisitors, totalActiveUsers: totalActivUsers });
     } catch (error) {
         console.error('Error fetching visitor count:', error);
         res.render("HomePage", { totalVisitors: 0 }); 
